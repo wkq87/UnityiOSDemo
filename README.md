@@ -7,3 +7,7 @@
   调用非常简单:  
     SaveDataInstanceCtrl.instance.SaveData(key,value);    
     SaveDataInstanceCtrl.instance.GetDataByKey(key);    
+
+参考链接：
+https://blog.csdn.net/cherish_joy/article/details/70314336（调用时参数的传递）
+
