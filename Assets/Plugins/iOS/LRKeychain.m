@@ -1,15 +1,6 @@
-//
-//  LRKeychain.m
-//  LazyReader
-//
-//  Created by 颜镜圳 on 16/9/7.
-//  Copyright © 2016年 颜镜圳. All rights reserved.
-//
+
 
 #import "LRKeychain.h"
-
-#define Key_User_PhoneNumber @"cn.reader.phoneNumber"
-#define Key_User_Password @"cn.reader.password"
 
 NSString* const STR_SPLITTER = @"|";
 NSString* const STR_EOF = @"endofline";
@@ -161,8 +152,17 @@ void SaveMyData(char* key,char* value){
     [LRKeychain addKeychainData:savevalue forKey:savekey];
 }
 
+//如果没有存这个key值，则返回“”
 const char* GetMyData(char* key){
     NSString* savekey = [LRKeychain charToNSString:key];
     NSString* savevalue = (NSString*)[LRKeychain getKeychainDataForKey:savekey];
-    return strdup([LRKeychain NSStringToChar:savevalue]);
+    if (savevalue == nil) {
+        return strdup("");
+    }else{
+        const char* ret = [LRKeychain NSStringToChar:savevalue];
+        if (ret == nil) {
+            return strdup("");
+        }
+        return strdup(ret);
+    }
 }
